@@ -1,0 +1,66 @@
+<!doctype html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Úkolovník</title>
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/vue.js"></script>¨
+
+</head>
+
+<body>
+    <section class="todoapp">
+        <header class="header">
+            <h1>Úkolovník</h1>
+            <input class="new-todo" placeholder="Zadejte úkol" autofocus v-model="newTodo" v-on:keyup.enter="addTodo">
+        </header>
+        <section class="main">
+
+            <ul class="todo-list"> 
+                <li v-for="todo in todos" :class="[{editing: todo == editedTodo}, todo.todoCompletionState]">
+                    <div class="view">
+                        <input class="toggle" type="checkbox" v-on:click="toggleTodoCompletionState(todo)" v-model="todo.todoCompletionToggleButtonState" >
+                        <input class="toggle1" type="checkbox" v-on:click="toggleTodoCompletionState1(todo)" v-model="todo.todoCompletionToggle1ButtonState">
+                       
+                        
+                        <label @dblclick="editTodo(todo)">{{todo.text}}</label>
+                        <button class="destroy" v-on:click="removeTodo(todo)"></button>
+                    </div>
+                    <input class="edit" @blur="updateTodo(todo)" @keyup.enter="updateTodo(todo)" v-model="editedTodoText">
+                    
+                </li>
+                
+            </ul>
+        </section>
+
+
+       
+        <footer class="footer" v-show="todos.length">
+            
+
+        
+            <ul class="filters">
+                <li>
+                    <a :class="allButton" href="#" v-on:click="showAll">Všechny úkoly</a>
+                </li>
+
+                <li>
+                    <a href="#" :class="activeButton" v-on:click="showActive">Nedokončené úkoly</a>
+                </li>
+
+            </ul>
+            
+           
+        </footer>
+    </section>
+
+
+
+
+    
+    <script src="js/base.js"></script>
+</body>
+
+</html>
